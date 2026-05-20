@@ -5,9 +5,16 @@ function moneylessFormat(value) {
 }
 
 async function getDashboardData() {
-  const response = await fetch("/api/status", { cache: "no-store" });
-  if (!response.ok) throw new Error("No fue posible cargar los datos del dashboard.");
-  return response.json();
+  const sources = ["/api/status", "../data/mart/dashboard_data.json"];
+  for (const source of sources) {
+    try {
+      const response = await fetch(source, { cache: "no-store" });
+      if (response.ok) return response.json();
+    } catch (error) {
+      // GitHub Pages does not have the local Python API, so try the static JSON.
+    }
+  }
+  throw new Error("No fue posible cargar los datos del dashboard.");
 }
 
 function drawBarChart(canvasId, rows, options = {}) {
@@ -107,8 +114,12 @@ document.getElementById("refreshBtn").addEventListener("click", async (event) =>
   button.textContent = "Actualizando...";
   try {
     const response = await fetch("/api/refresh", { cache: "no-store" });
-    if (!response.ok) throw new Error("No fue posible actualizar el pipeline.");
+    if (!response.ok) throw new Error("Modo estatico");
     await load();
+  } catch (error) {
+    await load();
+    document.getElementById("statusBox").textContent +=
+      " En GitHub Pages se muestran los datos publicados; para refrescar desde UCI ejecuta el pipeline localmente y sube los cambios.";
   } finally {
     button.disabled = false;
     button.textContent = "Actualizar datos";
