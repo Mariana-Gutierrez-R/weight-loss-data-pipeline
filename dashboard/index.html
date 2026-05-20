@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard | Hábitos alimenticios y peso</title>
+    <link rel="stylesheet" href="/dashboard/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Pipeline de ingeniería de datos</p>
+        <h1>Hábitos alimenticios, actividad física y niveles de peso</h1>
+      </div>
+      <button id="refreshBtn" type="button" title="Actualizar dataset y dashboard">
+        Actualizar datos
+      </button>
+    </header>
+
+    <main>
+      <section class="status" id="statusBox">Cargando datos...</section>
+
+      <section class="kpi-grid" aria-label="Indicadores principales">
+        <article class="kpi">
+          <span>Registros</span>
+          <strong id="kpiRecords">-</strong>
+        </article>
+        <article class="kpi">
+          <span>IMC promedio</span>
+          <strong id="kpiBmi">-</strong>
+        </article>
+        <article class="kpi">
+          <span>Sobrepeso u obesidad</span>
+          <strong id="kpiOverweight">-</strong>
+        </article>
+        <article class="kpi">
+          <span>Riesgo de hábitos</span>
+          <strong id="kpiRisk">-</strong>
+        </article>
+      </section>
+
+      <section class="chart-grid">
+        <article class="panel">
+          <h2>Niveles de obesidad</h2>
+          <canvas id="obesityChart" width="720" height="360"></canvas>
+        </article>
+        <article class="panel">
+          <h2>Categorías de IMC calculado</h2>
+          <canvas id="bmiChart" width="720" height="360"></canvas>
+        </article>
+        <article class="panel">
+          <h2>Riesgo promedio por edad</h2>
+          <canvas id="ageRiskChart" width="720" height="360"></canvas>
+        </article>
+        <article class="panel">
+          <h2>Medio de transporte</h2>
+          <canvas id="transportChart" width="720" height="360"></canvas>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h2>Muestra de datos transformados</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Edad</th>
+                <th>Género</th>
+                <th>IMC</th>
+                <th>Categoría</th>
+                <th>Actividad</th>
+                <th>Riesgo</th>
+                <th>Nivel original</th>
+              </tr>
+            </thead>
+            <tbody id="sampleTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/dashboard/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "pipeline_steps": [
+    "Extraccion automatica desde UCI o muestra fallback.",
+    "Carga a staging SQLite en raw_obesity.",
+    "Limpieza de tipos, nulos, si/no, categorias e indicadores.",
+    "Movimiento a warehouse SQLite en fact_obesity_habits.",
+    "Publicacion de CSV curado y JSON para dashboard."
+  ],
+  "outputs": {
+    "raw_csv": "C:\\Users\\Usuario\\MARIANA\\Clases\\Ingenieria de datos\\Trabajos\\Pipepline_datos\\data\\raw\\obesity_source.csv",
+    "staging_db": "C:\\Users\\Usuario\\MARIANA\\Clases\\Ingenieria de datos\\Trabajos\\Pipepline_datos\\data\\staging\\obesity_staging.db",
+    "warehouse_db": "C:\\Users\\Usuario\\MARIANA\\Clases\\Ingenieria de datos\\Trabajos\\Pipepline_datos\\data\\warehouse\\obesity_warehouse.db",
+    "curated_csv": "C:\\Users\\Usuario\\MARIANA\\Clases\\Ingenieria de datos\\Trabajos\\Pipepline_datos\\data\\mart\\obesity_curated.csv",
+    "clean_scraping_table_csv": "C:\\Users\\Usuario\\MARIANA\\Clases\\Ingenieria de datos\\Trabajos\\Pipepline_datos\\data\\mart\\tabla_limpia_scraping.csv",
+    "clean_scraping_table_preview": "C:\\Users\\Usuario\\MARIANA\\Clases\\Ingenieria de datos\\Trabajos\\Pipepline_datos\\data\\mart\\tabla_limpia_scraping.md",
+    "dashboard_json": "C:\\Users\\Usuario\\MARIANA\\Clases\\Ingenieria de datos\\Trabajos\\Pipepline_datos\\data\\mart\\dashboard_data.json"
+  },
+  "quality_checks": {
+    "raw_rows": 2111,
+    "missing_bmi": 0,
+    "duplicate_person_ids": 0
+  },
+  "source": {
+    "source_mode": "uci_download",
+    "source_url": "https://archive.ics.uci.edu/static/public/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition.zip",
+    "source_page": "https://archive.ics.uci.edu/dataset/544/estimation+of+obesity",
+    "message": "Dataset descargado desde UCI."
+  }
+}
